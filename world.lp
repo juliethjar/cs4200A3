@@ -115,7 +115,7 @@ corner(XX,YY) :- YY=max_width.
 :- terrain(XX,YY,door), not corner(XX,YY).
 
 :- terrain(XX,YY,bridge), immediate_neighbors(XX,YY,bridge, B_COUNT), B_COUNT < 1.
-	
+:- terrain(XX,YY,grass), immediate_neighbors(XX,YY,door, B_COUNT), B_COUNT < 1.	
 :- {terrain(XX,YY,TERRAIN_TYPE)} 0, terrain_type(TERRAIN_TYPE).
 
 connected(XX,YY) :- terrain(XX,YY,grass),terrain(XX,YY,door).
