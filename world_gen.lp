@@ -60,9 +60,10 @@ vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY+1,_).
 
 :- {terrain(XX,YY,grass)} max_width*max_height*1/2 .
 
-:- {terrain(XX,YY,water)} max_width*max_height*1/6 .
+:- {terrain(XX,YY,water)} max_width*max_height*1/8 .
 :- {terrain(XX,YY,bridge)} 5 .
 :- {terrain(XX,YY,door)} 2 .
+:- {terrain(XX,YY,wall)} 6 .
 
 
 :- terrain(XX,YY,flower), neighbors(XX,YY,flower, COUNT), COUNT > 3.
@@ -70,7 +71,7 @@ vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY+1,_).
 :- terrain(XX,YY,water), neighbors(XX,YY,water, COUNT), COUNT < 4.
 
 :- terrain(XX,YY,bridge), neighbors(XX,YY,water, COUNT), COUNT < 4.
-
+:- terrain(XX,YY,wall), neighbors(XX,YY,wall, COUNT), COUNT > 3.
 
 
 :- terrain(XX,YY,bridge), immediate_neighbors(XX,YY,bridge, B_COUNT), 
@@ -80,8 +81,9 @@ vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY+1,_).
 surrounded_by_water(XX,YY) :-  terrain(XX+1,YY,water),terrain(XX-1,YY,water).
 surrounded_by_water(XX,YY) :-  terrain(XX,YY-1,water),terrain(XX,YY-1,water).
 
-:- terrain(XX,YY,bridge), not surrounded_by_water(XX,YY).
 
+:- terrain(XX,YY,bridge), not surrounded_by_water(XX,YY).
+:- terrain(XX,YY,door), not surrounded_by_water(XX,YY).
 :- terrain(XX,YY,bridge), immediate_neighbors(XX,YY,bridge, B_COUNT), B_COUNT < 1.
 	
 :- {terrain(XX,YY,TERRAIN_TYPE)} 0, terrain_type(TERRAIN_TYPE).
