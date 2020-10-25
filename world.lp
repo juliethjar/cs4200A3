@@ -1,8 +1,8 @@
 #const max_width=12.
 #const max_height=10.
 
-terrain_type(grass;tree;flower;water;bridge).
-construction_type(door;wall;floor;bed).
+terrain_type(grass;tree;flower;water;bridge;door;wall;floor;bed).
+
 
 width(1..max_width).
 height(1..max_height).
@@ -61,7 +61,7 @@ vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY+1,_).
 
 :- {terrain(XX,YY,water)} max_width*max_height*1/6 .
 :- {terrain(XX,YY,bridge)} 5 .
-
+:- {terrain(XX,YY,door)} 1 .
 
 :- terrain(XX,YY,flower), neighbors(XX,YY,flower, COUNT), COUNT > 3.
 
@@ -105,3 +105,34 @@ reachable(XX,YY) :- reachable(XX,YY-1), not terrain(XX,YY,water), width(XX), hei
 
 :- terrain(XX,YY,TERRAIN), TERRAIN != water, not reachable(XX,YY).
 
+on_water_bridge_tree(XX,YY) :-  terrain(XX,YY,water).
+on_water_bridge_tree(XX,YY) :-  terrain(XX,YY,bridge).
+on_water_bridge_tree(XX,YY) :-  terrain(XX,YY,tree).
+
+:- terrain(XX,YY,door), not on_water_bridge_tree(XX,YY).
+:- terrain(XX,YY,wall), not on_water_bridge_tree(XX,YY).
+:- terrain(XX,YY,floor), not on_water_bridge_tree(XX,YY).
+:- terrain(XX,YY,bed), not on_water_bridge_tree(XX,YY).
+
+open_water_bridge_tree(XX,YY) :-  terrain(XX+1,YY,water), terrain(XX-1,YY,water).
+open_water_bridge_tree(XX,YY) :-  terrain(XX,YY-1,water), terrain(XX,YY+1,water).
+open_water_bridge_tree(XX,YY) :-  terrain(XX+1,YY,bridge), terrain(XX-1,YY,bridge).
+open_water_bridge_tree(XX,YY) :-  terrain(XX,YY-1,bridge), terrain(XX,YY+1,bridge).
+open_water_bridge_tree(XX,YY) :-  terrain(XX+1,YY,tree), terrain(XX+1,YY,tree).
+open_water_bridge_tree(XX,YY) :-  terrain(XX,YY-1,tree), terrain(XX,YY+1,tree).
+
+:- terrain(XX,YY,door), not open_water_bridge_tree(XX,YY).
+
+sidebyside(XX,YY) :-   terrain(XX,YY-1,door).
+sidebyside(XX,YY) :-   terrain(XX,YY+1,door).
+sidebyside(XX,YY) :-   terrain(XX-1,YY,door).
+sidebyside(XX,YY) :-   terrain(XX+1,YY,door).
+
+:- terrain(XX,YY,door), not sidebyside(XX,YY).
+
+corner(XX,YY) :- XX=0.
+corner(XX,YY) :- XX=max_height.
+corner(XX,YY) :- YY=0.
+corner(XX,YY) :- YY=max_width.
+
+:- terrain(XX,YY,door), not corner(XX,YY).
