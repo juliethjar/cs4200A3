@@ -32,29 +32,7 @@ immediate_neighbors(XX,YY,TYPE, COUNT) :-
 					construction(TYPE).
 :- {construction(XX,YY,door)} 1.
 
-on_water_bridge_tree(XX,YY) :-  construction(XX,YY,water).
-on_water_bridge_tree(XX,YY) :-  construction(XX,YY,bridge).
-on_water_bridge_tree(XX,YY) :-  construction(XX,YY,tree).
 
-:- construction(XX,YY,door), not on_water_bridge_tree(XX,YY).
-:- construction(XX,YY,wall), not on_water_bridge_tree(XX,YY).
-:- construction(XX,YY,floor), not on_water_bridge_tree(XX,YY).
-:- construction(XX,YY,bed), not on_water_bridge_tree(XX,YY).
 
-open_water_bridge_tree(XX,YY) :-  construction(XX+1,YY,water), construction(XX-1,YY,water).
-open_water_bridge_tree(XX,YY) :-  construction(XX,YY-1,water), construction(XX,YY+1,water).
-open_water_bridge_tree(XX,YY) :-  construction(XX+1,YY,bridge), construction(XX-1,YY,bridge).
-open_water_bridge_tree(XX,YY) :-  construction(XX,YY-1,bridge), construction(XX,YY+1,bridge).
-open_water_bridge_tree(XX,YY) :-  construction(XX+1,YY,tree), construction(XX+1,YY,tree).
-open_water_bridge_tree(XX,YY) :-  construction(XX,YY-1,tree), construction(XX,YY+1,tree).
-
-:- construction(XX,YY,door), not open_water_bridge_tree(XX,YY).
-
-sidebyside(XX,YY) :-   construction(XX,YY-1,door).
-sidebyside(XX,YY) :-   construction(XX,YY+1,door).
-sidebyside(XX,YY) :-   construction(XX-1,YY,door).
-sidebyside(XX,YY) :-   construction(XX+1,YY,door).
-
-:- construction(XX,YY,door), not sidebyside(XX,YY).
 
 
