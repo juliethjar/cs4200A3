@@ -118,7 +118,7 @@ corner(XX,YY) :- YY=max_width.
 	
 :- {terrain(XX,YY,TERRAIN_TYPE)} 0, terrain_type(TERRAIN_TYPE).
 
-connected(XX,YY) :- terrain(XX,YY,grass).
+connected(XX,YY) :- terrain(XX,YY,grass),terrain(XX,YY,door).
 connected(XX,YY) :- terrain(XX,YY,bridge), 1 {connected(XX,YY-1);
 																	connected(XX-1,YY);
 																	connected(XX+1,YY);	
