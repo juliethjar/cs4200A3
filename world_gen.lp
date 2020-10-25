@@ -62,6 +62,7 @@ vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY+1,_).
 
 :- {terrain(XX,YY,water)} max_width*max_height*1/6 .
 :- {terrain(XX,YY,bridge)} 5 .
+:- {terrain(XX,YY,door)} 2 .
 
 
 :- terrain(XX,YY,flower), neighbors(XX,YY,flower, COUNT), COUNT > 3.
@@ -69,6 +70,7 @@ vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY+1,_).
 :- terrain(XX,YY,water), neighbors(XX,YY,water, COUNT), COUNT < 4.
 
 :- terrain(XX,YY,bridge), neighbors(XX,YY,water, COUNT), COUNT < 4.
+
 
 
 :- terrain(XX,YY,bridge), immediate_neighbors(XX,YY,bridge, B_COUNT), 
