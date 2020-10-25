@@ -124,7 +124,7 @@ connected(XX,YY) :- terrain(XX,YY,bridge), 1 {connected(XX,YY-1);
 																	connected(XX,YY+1)}.
 																	
 :- terrain(XX,YY,bridge), not connected(XX,YY).
-
+:- terrain(XX,YY,door),  connected(XX,YY).
 1 {reachable(XX,YY,original) : width(XX), 
 	height(YY)} 1.
     
