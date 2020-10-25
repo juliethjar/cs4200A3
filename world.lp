@@ -59,7 +59,7 @@ vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY+1,_).
 
 :- {terrain(XX,YY,grass)} max_width*max_height*1/2 .
 
-:- {terrain(XX,YY,water)} max_width*max_height*1/6 .
+:- {terrain(XX,YY,water)} max_width*max_height*1/8 .
 :- {terrain(XX,YY,bridge)} 4 .
 :- {terrain(XX,YY,door)} 1 .
 
@@ -78,32 +78,6 @@ surrounded_by_water(XX,YY) :-  terrain(XX+1,YY,water),terrain(XX-1,YY,water).
 surrounded_by_water(XX,YY) :-  terrain(XX,YY-1,water),terrain(XX,YY-1,water).
 
 :- terrain(XX,YY,bridge), not surrounded_by_water(XX,YY).
-
-:- terrain(XX,YY,bridge), immediate_neighbors(XX,YY,bridge, B_COUNT), B_COUNT < 1.
-	
-:- {terrain(XX,YY,TERRAIN_TYPE)} 0, terrain_type(TERRAIN_TYPE).
-
-connected(XX,YY) :- terrain(XX,YY,grass).
-connected(XX,YY) :- terrain(XX,YY,bridge), 1 {connected(XX,YY-1);
-																	connected(XX-1,YY);
-																	connected(XX+1,YY);	
-																	connected(XX,YY+1)}.
-																	
-:- terrain(XX,YY,bridge), not connected(XX,YY).
-
-1 {reachable(XX,YY,original) : width(XX), 
-	height(YY)} 1.
-    
-:- reachable(XX,YY,original), not terrain(XX,YY,grass).
-reachable(XX,YY) :- reachable(XX,YY,original).
-
-reachable(XX,YY) :- reachable(XX+1,YY), not terrain(XX,YY,water), width(XX), height(YY).
-reachable(XX,YY) :- reachable(XX-1,YY), not terrain(XX,YY,water), width(XX), height(YY).
-reachable(XX,YY) :- reachable(XX,YY+1), not terrain(XX,YY,water), width(XX), height(YY).
-reachable(XX,YY) :- reachable(XX,YY-1), not terrain(XX,YY,water), width(XX), height(YY).
-
-
-:- terrain(XX,YY,TERRAIN), TERRAIN != water, not reachable(XX,YY).
 
 on_water_bridge_tree(XX,YY) :-  terrain(XX,YY,water).
 on_water_bridge_tree(XX,YY) :-  terrain(XX,YY,bridge).
@@ -136,3 +110,30 @@ corner(XX,YY) :- YY=0.
 corner(XX,YY) :- YY=max_width.
 
 :- terrain(XX,YY,door), not corner(XX,YY).
+
+:- terrain(XX,YY,bridge), immediate_neighbors(XX,YY,bridge, B_COUNT), B_COUNT < 1.
+	
+:- {terrain(XX,YY,TERRAIN_TYPE)} 0, terrain_type(TERRAIN_TYPE).
+
+connected(XX,YY) :- terrain(XX,YY,grass).
+connected(XX,YY) :- terrain(XX,YY,bridge), 1 {connected(XX,YY-1);
+																	connected(XX-1,YY);
+																	connected(XX+1,YY);	
+																	connected(XX,YY+1)}.
+																	
+:- terrain(XX,YY,bridge), not connected(XX,YY).
+
+1 {reachable(XX,YY,original) : width(XX), 
+	height(YY)} 1.
+    
+:- reachable(XX,YY,original), not terrain(XX,YY,grass).
+reachable(XX,YY) :- reachable(XX,YY,original).
+
+reachable(XX,YY) :- reachable(XX+1,YY), not terrain(XX,YY,water), width(XX), height(YY).
+reachable(XX,YY) :- reachable(XX-1,YY), not terrain(XX,YY,water), width(XX), height(YY).
+reachable(XX,YY) :- reachable(XX,YY+1), not terrain(XX,YY,water), width(XX), height(YY).
+reachable(XX,YY) :- reachable(XX,YY-1), not terrain(XX,YY,water), width(XX), height(YY).
+
+
+:- terrain(XX,YY,TERRAIN), TERRAIN != water, not reachable(XX,YY).
+
