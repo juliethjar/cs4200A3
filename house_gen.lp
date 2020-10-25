@@ -3,8 +3,7 @@
 terrain_types(water;glass;bridge;tree;flower).
 construction_types(door;wall;floor;bed).
 
-width(1..max_width).
-height(1..max_height).
+
 
 {construction(XX,YY,TYPE) : construction_types(TYPE)} 1 :- 
 width(XX), height(YY).
