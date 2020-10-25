@@ -1,7 +1,7 @@
 #const max_width=12.
 #const max_height=10.
 
-terrain_type(grass;tree;flower;water;bridge;door).
+terrain_type(grass;tree;flower;water;bridge).
 
 
 width(1..max_width).
@@ -59,11 +59,10 @@ vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY+1,_).
 
 :- {terrain(XX,YY,grass)} max_width*max_height*1/2 .
 
-:- {terrain(XX,YY,water)} max_width*max_height*1/9 .
-:- {terrain(XX,YY,bridge)} 4 .
-:- {terrain(XX,YY,door)} 3 .
+:- {terrain(XX,YY,water)} max_width*max_height*1/6 .
+:- {terrain(XX,YY,bridge)} 5 .
 
-:- terrain(XX,YY,door), neighbors(XX,YY,door, COUNT), COUNT > 3.
+
 :- terrain(XX,YY,flower), neighbors(XX,YY,flower, COUNT), COUNT > 3.
 
 :- terrain(XX,YY,water), neighbors(XX,YY,water, COUNT), COUNT < 4.
