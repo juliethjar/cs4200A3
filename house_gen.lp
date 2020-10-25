@@ -48,18 +48,18 @@ open_water_bridge_tree(XX,YY) :-  construction(XX,YY-1,bridge), construction(XX,
 open_water_bridge_tree(XX,YY) :-  construction(XX+1,YY,tree), construction(XX+1,YY,tree).
 open_water_bridge_tree(XX,YY) :-  construction(XX,YY-1,tree), construction(XX,YY+1,tree).
 
-:- construction(XX,YY,door), not open_water_bridge_tree(XX,YY)
+:- construction(XX,YY,door), not open_water_bridge_tree(XX,YY).
 
 sidebyside(XX,YY) :-   construction(XX,YY-1,door).
 sidebyside(XX,YY) :-   construction(XX,YY+1,door).
 sidebyside(XX,YY) :-   construction(XX-1,YY,door).
 sidebyside(XX,YY) :-   construction(XX+1,YY,door).
 
-:- construction(XX,YY,door), not sidebyside(XX,YY)
+:- construction(XX,YY,door), not sidebyside(XX,YY).
 
-corner(XX,YY) :- XX=0
-corner(XX,YY) :- XX=max_height
-corner(XX,YY) :- YY=0
-corner(XX,YY) :- YY=max_width
+corner(XX,YY) :- XX=0.
+corner(XX,YY) :- XX=max_height.
+corner(XX,YY) :- YY=0.
+corner(XX,YY) :- YY=max_width.
 
-:- construction(XX,YY,door), not corner(XX,YY)
+:- construction(XX,YY,door), not corner(XX,YY).
