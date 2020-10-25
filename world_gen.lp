@@ -2,7 +2,7 @@
 #const max_width=12.
 #const max_height=10.
 
-terrain_type(grass;tree;flower;water;bridge).
+terrain_type(grass;tree;flower;water;bridge;floor;bed;wall;door).
 
 
 width(1..max_width).
