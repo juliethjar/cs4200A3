@@ -72,6 +72,7 @@ vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY+1,_).
 
 :- terrain(XX,YY,bridge), neighbors(XX,YY,water, COUNT), COUNT < 2.
 
+:- terrain(XX,YY,grass), neighbors(XX,YY,door, COUNT), COUNT < 2.
 
 :- terrain(XX,YY,bridge), immediate_neighbors(XX,YY,bridge, B_COUNT), 
 	terrain(XX,YY,bridge), immediate_neighbors(XX,YY,grass, G_COUNT), B_COUNT + G_COUNT != 2.
@@ -82,14 +83,7 @@ surrounded_by_water(XX,YY) :-  terrain(XX,YY-1,water),terrain(XX,YY-1,water).
 
 :- terrain(XX,YY,bridge), not surrounded_by_water(XX,YY).
 
-on_water_bridge_tree(XX,YY) :-  terrain(XX,YY,water).
-on_water_bridge_tree(XX,YY) :-  terrain(XX,YY,bridge).
-on_water_bridge_tree(XX,YY) :-  terrain(XX,YY,tree).
 
-:- terrain(XX,YY,door), not on_water_bridge_tree(XX,YY).
-:- terrain(XX,YY,wall), not on_water_bridge_tree(XX,YY).
-:- terrain(XX,YY,floor), not on_water_bridge_tree(XX,YY).
-:- terrain(XX,YY,bed), not on_water_bridge_tree(XX,YY).
 
 open_water_bridge_tree(XX,YY) :-  terrain(XX+1,YY,water), terrain(XX-1,YY,water).
 open_water_bridge_tree(XX,YY) :-  terrain(XX,YY-1,water), terrain(XX,YY+1,water).
