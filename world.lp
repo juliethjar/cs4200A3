@@ -2,7 +2,7 @@
 #const max_height=10.
 
 terrain_type(grass;tree;flower;water;bridge).
-
+construction_type(door;wall;floor;bed).
 
 width(1..max_width).
 height(1..max_height).
@@ -104,3 +104,4 @@ reachable(XX,YY) :- reachable(XX,YY-1), not terrain(XX,YY,water), width(XX), hei
 
 
 :- terrain(XX,YY,TERRAIN), TERRAIN != water, not reachable(XX,YY).
+
