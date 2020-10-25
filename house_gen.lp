@@ -30,7 +30,7 @@ immediate_neighbors(XX,YY,TYPE, COUNT) :-
 					construction(XX,YY+1,TYPE)},
 					construction(XX,YY,_),					
 					construction(TYPE).
-:- {terrain(XX,YY,door)} 1 .
+:- {construction(XX,YY,door)} 1 .
 
 on_water_bridge_tree(XX,YY) :-  construction(XX,YY,water).
 on_water_bridge_tree(XX,YY) :-  construction(XX,YY,bridge).
