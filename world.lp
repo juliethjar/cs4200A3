@@ -41,6 +41,7 @@ immediate_neighbors(XX,YY,TYPE, COUNT) :-
 					
 horizontal(XX,YY,start) :- terrain(XX,YY,bridge), terrain(XX-1,YY,grass).
 horizontal(XX,YY,start) :- terrain(XX,YY,bridge), terrain(XX+1,YY,grass).
+
 horizontal(XX,YY,mid) :- terrain(XX,YY,bridge), horizontal(XX-1,YY,_).
 horizontal(XX,YY,mid) :- terrain(XX,YY,bridge), horizontal(XX+1,YY,_).
 
@@ -63,7 +64,7 @@ vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY+1,_).
 :- {terrain(XX,YY,bridge)} 4 .
 :- {terrain(XX,YY,door)} 1 .
 
-:- terrain(XX,YY,door), neighbors(XX,YY,door, COUNT), COUNT > 3.
+:- terrain(XX,YY,door), neighbors(XX,YY,grass, COUNT), COUNT > 3.
 :- terrain(XX,YY,flower), neighbors(XX,YY,flower, COUNT), COUNT > 3.
 
 :- terrain(XX,YY,water), neighbors(XX,YY,water, COUNT), COUNT < 2.
