@@ -48,6 +48,7 @@ horizontal(XX,YY,mid) :- terrain(XX,YY,bridge), horizontal(XX+1,YY,_).
 
 vertical(XX,YY,start) :- terrain(XX,YY,bridge), terrain(XX,YY+1,grass).
 vertical(XX,YY,start) :- terrain(XX,YY,bridge), terrain(XX,YY-1,grass).
+vertical(XX,YY,start) :- terrain(XX,YY,grass), terrain(XX,YY-1,door).
 vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY-1,_).
 vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY+1,_).
 
