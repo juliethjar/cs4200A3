@@ -30,7 +30,7 @@ immediate_neighbors(XX,YY,TYPE, COUNT) :-
 					construction(XX,YY+1,TYPE)},
 					construction(XX,YY,_),					
 					construction(TYPE).
-:- {construction(XX,YY,door)} 1 .
+:- {construction(XX,YY,door)} 1.
 
 on_water_bridge_tree(XX,YY) :-  construction(XX,YY,water).
 on_water_bridge_tree(XX,YY) :-  construction(XX,YY,bridge).
@@ -57,9 +57,4 @@ sidebyside(XX,YY) :-   construction(XX+1,YY,door).
 
 :- construction(XX,YY,door), not sidebyside(XX,YY).
 
-corner(XX,YY) :- XX=0.
-corner(XX,YY) :- XX=max_height.
-corner(XX,YY) :- YY=0.
-corner(XX,YY) :- YY=max_width.
 
-:- construction(XX,YY,door), not corner(XX,YY).
