@@ -63,6 +63,7 @@ vertical(XX,YY,mid) :- terrain(XX,YY,bridge), vertical(XX,YY+1,_).
 :- {terrain(XX,YY,bridge)} 4 .
 :- {terrain(XX,YY,door)} 1 .
 
+:- terrain(XX,YY,door), neighbors(XX,YY,door, COUNT), COUNT > 3.
 :- terrain(XX,YY,flower), neighbors(XX,YY,flower, COUNT), COUNT > 3.
 
 :- terrain(XX,YY,water), neighbors(XX,YY,water, COUNT), COUNT < 2.
